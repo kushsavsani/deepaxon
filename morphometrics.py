@@ -5,7 +5,7 @@ obtain morphometric data for a single segmented image file where the meylin is a
 
 import numpy as np
 import cv2 #to work with images
-from skimage.measure import regionprops_table #to get shape properties
+from skimage.measure import label, regionprops_table #to get shape properties
 import pandas as pd #make spreadsheet
 from scipy import ndimage as ndi #for watershed segmentation
 from skimage.feature import peak_local_max #for watershed segmentation
@@ -14,12 +14,19 @@ import os
 
 def get_labels(img):
     distance = ndi.distance_transform_edt(img)
-    coords = peak_local_max(distance, footprint=np.ones((4,4)), labels=img)
-    mask = np.zeros(distance.shape, dtype=bool)
-    mask[tuple(coords.T)] = True
-    markers, _ = ndi.label(mask)
-    labels = watershed(-distance, markers, mask=img)
-    return labels
+    local_max_coords = peak_local_max(distance, min_distance=10)
+    local_max_mask = np.zeros(distance.shape, dtype=bool)
+    local_max_mask[tuple(local_max_coords.T)] = True
+    markers = label(local_max_mask)
+    segmented_cells = watershed(-distance, markers, mask=img)
+    return segmented_cells
+    # distance = ndi.distance_transform_edt(img)
+    # coords = peak_local_max(distance, footprint=np.ones((4,4)), labels=img)
+    # mask = np.zeros(distance.shape, dtype=bool)
+    # mask[tuple(coords.T)] = True
+    # markers, _ = ndi.label(mask)
+    # labels = watershed(-distance, markers, mask=img)
+    # return labels
 
 def get_myelin_row(myelin_df, x, y):
     '''
@@ -47,7 +54,7 @@ def get_morphometrics(img_path):
     img = cv2.imread(img_path)
     img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 
-    axon = cv2.inRange(img, 128, 255) #axons are everything above a medium gray
+    axon = cv2.inRange(img, 200, 255) #axons are everything above a medium gray
     myelin = cv2.inRange(img, 1, 255) #myelin is actually axon+myelin so everything above black
     
     #watershed labelling of axons then obtaining region properties and putting it in a DataFrame
