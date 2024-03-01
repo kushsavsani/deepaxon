@@ -94,15 +94,15 @@ def get_morphometrics(img_path):
         y = row['centroid-1']
         axon_area = row['area']
         axon_perimeter = row['perimeter']
-        axon_diam = (row['axis_major_length'] + row['axis_minor_length']) / 2 #getting axon diameter along the major axis
+        axon_diam = row['axis_major_length']#(row['axis_major_length'] + row['axis_minor_length']) / 2 #getting axon diameter along the major axis
         eccentricity = row['eccentricity']
         orientation = row['orientation']
         solidity = row['solidity']
         myelin_row = get_myelin_row(myelin_df, x, y) #get myelin corresponding to axon of interest
         myelin_area = myelin_row['area'] - axon_area #area of the myelin = (axon+myelin area) - (axon area)
-        myelin_thickness = ((myelin_row['axis_major_length'] + myelin_row['axis_minor_length']) / 2) - axon_diam #myelin thickness = (axon+myelin diam) - (axon diam)
+        myelin_thickness = myelin_row['axis_major_length']#((myelin_row['axis_major_length'] + myelin_row['axis_minor_length']) / 2) - axon_diam #myelin thickness = (axon+myelin diam) - (axon diam)
         myelin_perimeter = myelin_row['perimeter']
-        gratio = axon_diam / ((myelin_row['axis_major_length'] + myelin_row['axis_minor_length']) / 2)
+        gratio = axon_diam / myelin_row['axis_major_length']#((myelin_row['axis_major_length'] + myelin_row['axis_minor_length']) / 2)
         
         #make a one row DataFrame with axon and myelin data
         new_dict = {'label':label,
