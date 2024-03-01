@@ -1,0 +1,1 @@
+aggregate_metrics: {'avf': 0.165447998046875, 'mvf': 0.1455410427517361, 'gratio_aggr': 0.729387331340763, 'mean_axon_diam': 0.8021522416381612, 'mean_myelin_diam': 1.0997616865152313, 'mean_myelin_thickness': 0.14880472243853504, 'axon_density_mm2': 110211.41896335193}
