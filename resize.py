@@ -5,6 +5,8 @@ resize is used to crop images into a square so that when they are turned into pa
 
 from PIL import Image #for image-related work
 import os #to work with files and directories
+import numpy as np
+import cv2
 
 def cropper(image_path):
     '''
@@ -15,16 +17,14 @@ def cropper(image_path):
     :returns: A PIL Image object that is the centered, cropped image
     '''
     
-    image = Image.open(image_path) #opens the given image
-    min_dim = min(image.width, image.height) #find the smallest dimension in the image
+    image = cv2.imread(image_path, cv2.IMREAD_GRAYSCALE) #opens the given image
 
-    #set boundaries for each side of the image based on the smallest dimension
-    left = (image.width - min_dim) // 2
-    top = (image.height - min_dim) // 2
-    right = (image.width + min_dim) // 2
-    bottom = (image.height + min_dim) // 2
+    SIZE_X = image.shape[1] // 256 * 256
+    SIZE_Y = image.shape[0] // 256 * 256
+    
+    image = Image.fromarray(image)
+    cropped = image.crop((0,0,SIZE_X, SIZE_Y))
 
-    cropped = image.crop((left, top, right, bottom)) #make an image object that uses the cropped dimensions
     return cropped
 
 def dir_crop(dir_path):

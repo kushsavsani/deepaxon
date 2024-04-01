@@ -21,7 +21,7 @@ def get_labels(img):
     segmented_cells = watershed(-distance, markers, mask=img)
     return segmented_cells
     # distance = ndi.distance_transform_edt(img)
-    # coords = peak_local_max(distance, footprint=np.ones((4,4)), labels=img)
+    # coords = peak_local_max(distance, footprint=np.ones((10,10)), labels=img)
     # mask = np.zeros(distance.shape, dtype=bool)
     # mask[tuple(coords.T)] = True
     # markers, _ = ndi.label(mask)
