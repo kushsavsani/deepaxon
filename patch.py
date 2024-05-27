@@ -75,20 +75,20 @@ def patch(image_path):
             cv2.imwrite(patch_path, single_patch_img)
 
 def dir_patch(dir_path):
-    '''
-    Takes input of a folder of images. In the proper setup for patch, this program will be run for either the images or masks folder.
-    Turns every photo in the folder into patches and saves the patches in a new 'patches' folder.
-    Uses DeepAxon.patch function patch() to generation patches.
+   '''
+   Takes input of a folder of images. In the proper setup for patch, this program will be run for either the images or masks folder.
+   Turns every photo in the folder into patches and saves the patches in a new 'patches' folder.
+   Uses DeepAxon.patch function patch() to generation patches.
+
+   :param dir_path: A path (string or object) that points to a folder of images to convert every image in the folder into patches
+
+   :returns: Nothing
+   '''
     
-    :param dir_path: A path (string or object) that points to a folder of images to convert every image in the folder into patches
-    
-    :returns: Nothing
-    '''
-    
-    #goes through every image in the folder and runs the DeepAxon.patch function patch()
-    for image_name in os.listdir(dir_path):
-        image_path = os.path.join(dir_path, image_name)
-        patch(image_path)
+   #goes through every image in the folder and runs the DeepAxon.patch function patch()
+   for image_name in os.listdir(dir_path):
+      image_path = os.path.join(dir_path, image_name)
+      patch(image_path)   
         
 def batch_patch(dir_path):
     '''

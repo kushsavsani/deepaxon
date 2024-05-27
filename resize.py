@@ -54,3 +54,5 @@ def dir_crop(dir_path):
             cropped.save(crop_path)
     
     return crop_dir
+
+dir_crop(r"D:\Research\Isaacs Lab\DeepAxon Project Docs\test\images")

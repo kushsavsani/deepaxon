@@ -23,6 +23,19 @@ from sklearn.preprocessing import LabelEncoder #to relabel masks into 0,1,2
 from sklearn.model_selection import train_test_split #create 70/30 train test split
 from model import deepaxon_plusplus_model #model
 from patch import batch_patch #create patches
+from keras.preprocessing.image import ImageDataGenerator
+
+datagen_args = dict(
+    rotation_range=20,
+    width_shift_range=0.2,
+    height_shift_range=0.2,
+    shear_range=0.2,
+    zoom_range=0.2,
+    horizontal_flip=True,
+    fill_mode='nearest'
+)
+
+datagen = ImageDataGenerator(**datagen_args)
 
 def get_images(patch_path):
     '''
@@ -59,6 +72,15 @@ def base_label(train_masks):
     train_masks_encoded = train_masks_flat_encoded.reshape(n, h, w) #reshape the array to fit into original shape
     return train_masks_encoded
 
+def custom_generator(images, masks, batch_size):
+    datagen.fit(images)
+    generator = datagen.flow(images, masks, batch_size=batch_size, seed=42)
+    while True:
+        augmented_images, augmented_masks = next(generator)
+        images[:len(augmented_images)] = augmented_images
+        masks[:len(augmented_masks)] = augmented_masks
+        yield images, masks
+
 def train_model(dir_path, model_path, model_name, batch_size=16, epochs=200):
     '''
     Train and save model from training images and masks. Uses DeepAxon++ architecture
@@ -83,6 +105,9 @@ def train_model(dir_path, model_path, model_name, batch_size=16, epochs=200):
     #add another dimension to the arrays for training purposes
     train_images = np.expand_dims(train_images, axis=3)
     train_masks = np.expand_dims(train_masks, axis=3)
+    
+    augmented_data_generator = custom_generator(train_images, train_masks, 16)
+    print(train_images)
     
     #70/30 training/testing split
     X_train, X_test, y_train, y_test = train_test_split(train_images, train_masks, test_size = 0.10, random_state = 0)
