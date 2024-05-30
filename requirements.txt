@@ -1,0 +1,11 @@
+keras
+matplotlib
+numpy
+opencv_python
+pandas
+patchify
+Pillow
+scikit_learn
+scipy
+scikit_image
+tensorflow
