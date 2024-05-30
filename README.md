@@ -14,3 +14,21 @@ conda create -n "da_venv" python=3.8
 conda activate da_venv
 pip install -r requirements.txt
 ````
+
+## Train a Model
+1. Navigate to the deepaxon folder in Miniconda
+2. Type `python train`
+
+## Segment Images
+1. Navigate to the deepaxon folder in Miniconda
+2. Type `python segment`
+
+**The input for segmentation is a folder that contains ONLY images**
+
+## Get Image Morphometrics
+1. Navigate to the deepaxon folder in Miniconda
+2. Type `python morphometrics`
+
+*DeepAxon currently only has the capability of processing a single image at a time. We are planning on adding batch morphometrics soon.*
+
+# MORE INFORMATION TO COME THE README SOON
