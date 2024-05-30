@@ -22,7 +22,6 @@ import numpy as np
 from sklearn.preprocessing import LabelEncoder #to relabel masks into 0,1,2
 from sklearn.model_selection import train_test_split #create 70/30 train test split
 from model import deepaxon_plusplus_model #model
-from patch import batch_patch #create patches
 from PIL import Image #for image-related work
 from patchify import patchify #for simple patch making
 
