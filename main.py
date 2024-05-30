@@ -7,11 +7,11 @@ import os
 
 
 # '''--------------------------------TRAIN MODEL------------------------------'''
-# dir_path = r"D:\Research\Isaacs Lab\DeepAxon\training"
-# model_path = r"D:\Research\Isaacs Lab\DeepAxon\models"
-# model_name = 'model_10img_16bs-200epoch'
+#     dir_path = r"D:\Research\Isaacs Lab\DeepAxon\training"
+#     model_path = r"D:\Research\Isaacs Lab\DeepAxon\models"
+#     model_name = 'model_10img_16bs-200epoch'
 
-# train_model(dir_path, model_path, model_name, batch_size=16, epochs=200)
+#     train_model(dir_path, model_path, model_name, batch_size=16, epochs=200)
 # '''-----------------------------END TRAIN MODEL------------------------------'''
 
 
