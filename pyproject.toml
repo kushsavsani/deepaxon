@@ -1,6 +1,0 @@
-[project]
-name = "DeepAxon"
-version = "0.1.0"
-
-[project.scripts]
-train_model = 
