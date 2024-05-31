@@ -29,6 +29,6 @@ pip install -r requirements.txt
 1. Navigate to the deepaxon folder in Miniconda
 2. Type `python morphometrics`
 
-*DeepAxon currently only has the capability of processing a single image at a time. We are planning on adding batch morphometrics soon.*
+**The input for morphometric analysis is a folder that contains ONLY segmented images**
 
 # MORE INFORMATION TO COME THE README SOON
