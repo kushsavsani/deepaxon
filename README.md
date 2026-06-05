@@ -31,4 +31,4 @@ pip install -r requirements.txt
 
 **The input for morphometric analysis is a folder that contains ONLY segmented images**
 
-*MORE INFORMATION TO COME THE README SOON*
+**THIS REPO IS NO LONGER MAINTAINED FOR THE MOST UP TO DATE VERSION GO [HERE](https://github.com/VCU-Orthopaedics-Microsurgery-Lab/deepaxon)**
